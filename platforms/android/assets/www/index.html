@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" type="" href="css/w3.css">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet"  href="css/bootstrap.css">
+<link rel="stylesheet" href="css/ionicons.css">
+<link rel="stylesheet" href="css/weather-icons.css">
+<link rel="stylesheet" href="css/weather-icons-wind.css">
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/sideBar.js"></script>
+<script src="js/weatherIcons.js"></script>
+
+</head>
+<body>
+<!-------------------------Side Bar-------------------------->
+  <div data-role="panel" id="sideBar" data-display="overlay" data-swipe-close="true" data-theme="none">
+    <section>
+       <!--<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" style="display: relative; left: 80%; background:red;">No text</a>-->
+        <a href="#home-page">
+        <h3 class="w3-center font-white">RVTS</h3>
+        </a>
+    </section>
+    <hr>
+    <section>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#home-page"><span class="sideBarIcon"><i class="ion-ios-home"></i></span><span class="sideBarText">Home</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#vessel-status-page"><span class="sideBarIcon"><i class="ion-android-boat"></i></span><span class="sideBarText">Vessel Status</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#weather-page"><span class="sideBarIcon"><i class="ion-ios-partlysunny"></i></span><span class="sideBarText">Weather</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#schedule-page"><span class="sideBarIcon"><i class="ion-clipboard"></i></span><span class="sideBarText">Schedule</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#track-page"><span class="sideBarIcon"><i class="ion-android-locate"></i></span><span class="sideBarText">Track Vessel</span></a>
+    </section>
+    <hr>
+    <section>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#help-page"><span class="sideBarIcon"><i class="ion-ios-help"></i></span><span class="sideBarText">Help</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#about-page"><span class="sideBarIcon"><i class="ion-help-buoy"></i></span><span class="sideBarText">About</span></a>
+    </section>
+  </div>
+  
+<!------------------------------Home Page---------------------->
+<div data-role="page" id="home-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+    <!--<a href="#sideBar" style="background: none;border:none;outline:none;"><i class="ion-android-menu"></i></a>-->
+    <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Home</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <a href="#vessel-status-page">
+      <div class="w3-card home-menus">
+          <div class="home-icon-holder">
+            <i class="ion-android-boat home-menu-icon"></i>
+          </div>
+          <h5 class="home-menu-text">Vessel Status</h5>
+      </div>
+    </a>
+
+    <a href="#weather-page">
+      <div class="w3-card home-menus" onclick="getWeatherByCity();">
+          <div class="home-icon-holder">
+            <i class="ion-ios-partlysunny home-menu-icon"></i>
+          </div>
+          <h5 class="home-menu-text">Weather</h5>
+      </div>
+    </a>
+
+     <a href="#schedule-page">
+      <div class="w3-card home-menus">
+          <div class="home-icon-holder">
+            <i class="ion-clipboard home-menu-icon"></i>
+          </div>
+          <h5 class="home-menu-text">Schedule</h5>
+      </div>
+    </a>
+    <a href="#track-page">
+      <div class="w3-card home-menus">
+          <div class="home-icon-holder">
+            <i class="ion-map home-menu-icon"><i class="ion-location font-black" style="font-size: 18pt;"></i></i>
+          </div>
+          <h5 class="home-menu-text">Track Vessel</h5>
+      </div>
+    </a>
+
+     <a href="#help-page">
+      <div class="w3-card home-menus">
+          <div class="home-icon-holder">
+            <i class="ion-ios-help home-menu-icon"></i>
+          </div>
+          <h5 class="home-menu-text">Help</h5>
+      </div>
+    </a>
+
+     <a href="#about-page">
+      <div class="w3-card home-menus">
+          <div class="home-icon-holder">
+            <i class="ion-help-buoy home-menu-icon"></i>
+          </div>
+          <h5 class="home-menu-text">About</h5>
+      </div>
+    </a>
+  </div>
+</div> 
+
+<!-----------------------------Vessel Status Page-------------------->
+<div data-role="page" id="vessel-status-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Vessel Status</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <!----------Vessel Selection -------------->
+    <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br w3-card-2 w3-white">
+      <label for="select-choice-custom" class="select ui-select w3-center">Select Vessel</label>
+      <div class="ui-select" align="center">
+        <select name="vessel-selctor" id="vessel-selector" data-native-menu="false" data-mini="true">
+					<option value="1">Test Vessel 1</option>
+					<option value="2">Test Vessel 2</option>
+					<option value="3">Test Vessel 3</option>
+					<option value="4">Test Vessel 4</option>
+          <option value="5">Test Vessel 5</option>
+				</select>
+        <input type="button" name="search-vessel" value="View Status" data-mini="true" data-theme="a" data-icon="search" data-iconpos="left" data-inline="true" onclick="setVesselStatus();">
+      </div>
+    </div>
+
+    <!------------------------Display Result------------>
+    <div class="w3-card-2 w3-teal" align="center" id="vessel-status-result" style="display: none;">
+      <h3 id="vs-name">Test Vessel 1</h3>
+      <hr style="margin-top: 3px; margin-bottom: 3px;">
+      <h4 id="vs-capacity">Capacity: 400 Tons</h4>
+      <h4 id="vs-load">Current Load: 80%</h4>
+      <h4 id="vs-status">Status: Safe</h4>
+    </div>
+
+
+  </div>
+</div> 
+
+<!------------------------------Weather Page---------------->
+<div data-role="page" id="weather-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Weather</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <div class="w3-card-2 w3-white" align="center">
+      <a href="#selectCity" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn  ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-location ui-btn-icon-notext" title="Select Location" style="float: right;">Select Location</a>
+      <div class="ui-select" align="center" data-role="popup" id="selectCity">
+        <select name="city-selector" id="city-selector" data-native-menu="true" data-mini="true" data-theme="a">
+          <option value="Dhaka">Dhaka, BD</option>
+          <option value="Chittagong">Chittagong, BD</option>
+          <option value="Khulna">Khulna, BD</option>
+          <option value="Barisal">Barisal, BD</option>
+          <option value="Rajshahi">Rajshahi, BD</option>
+          <option value="Sylhet">Sylhet, BD</option>
+        </select>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back" style="margin: 0 auto; background: teal; height: 30px;width: 80px;color:white; font-size: 8pt; margin-bottom: 5px;" onclick="getWeatherByCity();">Done</a>
+       </div>
+      <table class="wm-table">
+        <thead>
+        <th class="wm-col-1"></th>
+        <th class="wm-col-2">
+            <i class="wi wi-na" id="wm-icon"></i>
+            <p><span id="wm-temp">0</span><span><i class="wi wi-celsius" id="wm-celsius"></i></span></p>
+        </th>
+        <th class="wm-col-3" id="wm-status">Light Rain</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="wm-col-1"><span id="wm-mn-temp">Min: 0</span><span><i class="wi wi-celsius"></i></span></td>
+            <td id="wm-wind" class="wm-col-2">Wind: 10kmh</td>
+            <td class="wm-col-3"><span id="wm-mx-temp" >Max: 30</span><span><i class="wi wi-celsius"></i></span></td> 
+          </tr>
+        </tbody>
+      </table>
+     <h4 id="city-name">Please Connect to internet</h4>
+    </div>
+
+    <div class="w3-card-2 w3-white">
+      <h3 class="fh-text">Forecast</h3>
+      <div class="ft-holder">
+        <table class="f-table w3-table w3-striped w3-border">
+          <thead>
+            <th class="w3-center">Date</th>
+            <th class="w3-center">Time</th>
+            <th class="w3-center">Forecast</th>
+          </thead>
+          <tbody id="ft-body">
+          
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+</div> 
+
+<!-------------------------------Schedule Page-------------------->
+<div data-role="page" id="schedule-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Schedule</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <div class="w3-card-2 w3-white st-holder">
+    <table class="w3-striped schedule-table">
+      <thead class="st-head w3-fixed">
+            <th class="st-col-1">SL.</th>
+            <th class="st-col-2">Name</th>
+            <th class="st-col-3">From</th>
+            <th class="st-col-4">To</th>
+      </thead>
+      <tbody class="st-body" id="st-body">
+        <script>
+          showSchedule();
+        </script>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div> 
+
+<!-------------------------------Track Vessel Page-------------------->
+<div data-role="page" id="track-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Track Vessel</h1>
+  </div>
+  <div data-role="main" class="ui-content" id="map-canvas">
+    <script>
+      $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBMbArU0qJJusHE-rKuI839Sy36K0q8900", function() {
+        drawMap();
+      });
+      </script>
+    </div>
+    <a href="#selectTrackVessel" id="map-button" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn  ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-location ui-btn-icon-notext" title="Select Location" style="float: right;">Select Vessel</a>    
+    <div class="ui-select" align="center" data-role="popup" id="selectTrackVessel">
+      <select name="track-vessel-selector" id="track-vessel-selector" data-native-menu="true" data-mini="true" data-theme="a">
+        <option value="0">Vessel 1</option>
+        <option value="1">Vessel 2</option>
+        <option value="2">Vessel 3</option>
+        <option value="3">Vessel 4</option>
+        <option value="4">Vessel 5</option>
+        <option value="5">Vessel 6</option>
+      </select>
+      <a  href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back" style="margin: 0 auto; background: teal; height: 30px;width: 80px;color:white; font-size: 8pt; margin-bottom: 5px;" onclick="moveMarker();">Done</a>
+    </div>
+    <div id="map-info">
+      <h5 id="map-vessel-name">Test Vessel 1</h5>
+      <hr id="lbreak">
+      <h5 id="map-destination" class="w3-center">Destination: Dhaka</h5>
+      <h5 id="map-speed" class="w3-center">Speed: 25km/h</h5>
+    </div> 
+</div> 
+<!---------------------Help page -------------------->
+<div data-role="page" id="help-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>Help</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Welcome to Help section. Unfortunately currently there are no available help. Sorry :(</p>
+  </div>
+</div> 
+
+<!--------------------------About Page---------------------->
+<div data-role="page" id="about-page">
+  <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
+     <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <h1>About</h1>
+  </div>
+
+  <div data-role="main" class="ui-content" style="text-align:center;">
+    <h3>Riverine Vehicle Tracking System (RVTS)</h3>
+    <hr>
+    <p>This app was developed by<br>
+      Md. Emruz Hossain<br>
+      Student of<br>
+      Department of CSE<br>
+      Chittagong University of Engineering & Technology<br>
+      <br>
+      Supervised by,<br>
+      Dr. Mohammad Shamsul Arefin<br>
+      Head of Department and Professor<br>
+      Department of CSE<br>
+      Chittagong University of Engineering & Technology
+    </p>
+  </div>
+</div> 
+<script>getData();</script>
+</body>
+</html>

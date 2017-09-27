@@ -1,0 +1,321 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+
+    
+}
+.ui-content{
+    background: #e9e9e9;
+}
+
+/* Portrait layout (default) */
+.app {
+
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+       
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+#sideBar{
+    background: #1D2B36;
+    opacity: 1;
+    position:absolute;
+    padding-left: 0px;
+    padding-right: 0px; 
+}
+.font-white{
+    color: #DCDCDC;
+}
+.font-black{
+    color: black;
+}
+#btnIconPanel{
+    background: teal;
+    display: inline;
+    color: white;
+    height: 70px;
+    width: 70px; 
+    border-radius: 50%;
+    /*left: 40%;*/
+}
+.sideMenuLink{
+    display: block;
+    color: black;
+    background: #ddd;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+.sideBarText{
+    margin-left: 10px;
+    font-size: 12pt;
+}
+.sideBarIcon{
+    font-size: 18pt;
+}
+.closePanel{
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    background: red;
+    /*border-radius: 50%;*/
+}
+.home-menus{
+    display: inline-block;
+    height: 20%;
+    width: 40%;
+    margin: 4%;
+    background: #1D2B36;
+    text-align: center;
+    opacity: 0.7;
+}
+.home-icon-holder{
+    background: white;
+    height: 70%;
+    padding-top: 10%;
+}
+
+.home-menu-icon{
+    font-size: 34pt;
+    color: black;
+}
+.home-menu-text{
+    color: #F0F0F0;
+}
+.center-button{
+    margin: 0 auto;
+}
+
+.wm-table{
+    width: 100%;
+}
+.wm-col-1{
+    width:30%;
+    text-align:center;
+    /*background:red;*/
+}
+.wm-col-2{
+    width:40%;
+    text-align: center;
+    /*background: teal;*/
+}
+.wm-col-3{
+    width:30%;
+    text-align:center;
+    /*background:blue;*/
+}
+#wm-icon{
+    font-size: 42pt;
+}
+#wm-temp{
+    font-size:28pt;
+}
+#wm-status{
+    font-size:14pt;
+}
+#wm-celsius{
+    font-size:28pt;
+}
+#city-name{
+    opacity:0.8;
+    padding: 5px;
+    background: #1D2B36;
+    color: #F0F0F0;
+    text-align: center;    
+}
+
+.fh-text{
+    text-align:center;
+    padding:5px;
+    background: #1D2B36;
+    opacity:0.8;
+    color: #F0F0F0;
+    margin-bottom:0px;
+}
+.f-table{
+    width:100%;
+    text-align:center;
+    margin-top:0px;
+}
+.ft-holder{
+    max-height: 420px;
+    overflow-y: auto;
+}
+.f-table td{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+.f-table th{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+.f-table tr{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.f-day{
+    text-align:center;
+    /*background:teal;*/
+    color: black;
+}
+
+.ft-icon{
+    font-size:14pt;
+}
+.ft-temp{
+    font-size: 12pt;
+}
+.ft-dscrn{
+    font-size: 6pt;
+    font-weight: bold;
+}
+.td-time{
+    width: 10%;
+    text-align: center;
+}
+
+.schedule-table{
+    width: 100%;
+    text-align: center;
+}
+.schedule-table td{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+.schedule-table th{
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+}
+.schedule-table tr{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.st-head{
+    background: #1D2B36;
+    color: #F0F0F0;
+    opacity: 0.8;
+}
+
+.st-col-1{
+    width: 5%;
+    text-align: center;
+}
+.st-col-2{
+    width:40%;
+    text-align: center;
+}
+.st-col-3{
+    width: 25%;
+    text-align: center;
+}
+.st-col-4{
+    width: 25%;
+    text-align: center;
+}
+.st-holder{
+    max-height: 400px;
+    overflow:auto;
+}
+
+/* ----------------------------Map Page----------------- */
+
+#map-canvas{
+    height: 100%;
+    min-height: 200px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    display: inline-block;
+
+}
+#map-button{
+  position: relative;
+  display: inline;
+  z-index: 2;
+}
+#map-info{
+    position: relative;
+    z-index: 2;
+    margin-top: 100%;
+}
+#map-vessel-name{
+    text-align: center;
+    opacity: 1;
+}
+#lbreak{
+    margin-top:0px;
+    margin-bottom:0px;
+    opacity: 1;
+}
