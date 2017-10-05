@@ -9,25 +9,26 @@ $(function(){
     	$( ".sideBarIndicator").removeClass("ui-icon-delete").addClass("ui-icon-grid");
         $(".sideBarIndicator").css("left","5px");
     });
+    getData();
+    setTimeout(function(){
+        showSchedule();
+    },100);
+    
 });
 
 ///-----------------------Vessel Status Control--------------------
-var VesselName=["Test Vessel 1","Test Vessel 2","Test Vessel 3", "Test Vessel 4","Test Vessel 5"];
-var Capacity=["450","300","600","800","500"];
-var CurrentLoad=[80,100,60,70,105];
-var Status=["Safe","Safe","Safe","Safe","Overloaded"];
+var data ;
 var selectedVessel=0;
 var overLoaded="Overloaded";
 function setVesselStatus() {
     $("#vessel-status-result").css("display","block");
     selectedVessel=$("#vessel-selector").val();
-    var vesselId="#"+selectedVessel;
-    selectedVessel=selectedVessel-1;
-    $("#vs-name").text(VesselName[selectedVessel]);
-    $("#vs-capacity").text("Capacity: "+Capacity[selectedVessel]+" Tons");
-    $("#vs-load").text("Current Load: "+CurrentLoad[selectedVessel]+"%");
-    $("#vs-status").text("Status: "+Status[selectedVessel]);
-    if(Status[selectedVessel]==overLoaded)
+    
+    $("#vs-name").text(data[selectedVessel].name);
+    $("#vs-capacity").text("Capacity: "+data[selectedVessel].capacity+" Tons");
+    $("#vs-load").text("Current Load: "+data[selectedVessel].loadPercentage+"%");
+    $("#vs-status").text("Status: "+data[selectedVessel].loadStatus);
+    if(data[selectedVessel].loadStatus==="Overloaded")
     {
          $("#vessel-status-result").css("opacity","0.8");
         $("#vessel-status-result").removeClass("w3-teal");
@@ -128,16 +129,20 @@ function showSchedule(){
     }
 }
 // ----------------------Track Vessel Page--------------------------
-var DemoLat=[22.34343,22.24353,22.32343,22.44343,22.14343,22.74343];
-var DemoLng=[91.23432,91.21432,91.03032,91.03532,91.23432,91.13432];
+
+function initMap() {
+    var windowHeight=$(window).height();
+    $("#map-canvas").css("height",windowHeight);
+    $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBMbArU0qJJusHE-rKuI839Sy36K0q8900", function() {
+        drawMap();});
+}
 var map,marker;
 function drawMap(){
     var windowHeight=$(window).height();
-    $("#map-canvas").css("height",windowHeight-100);
     $("#map-button").css("margin-top",(windowHeight)/2);
     var  vesselId=$("#track-vessel-selector").val();
 
-    var latlng=new google.maps.LatLng(DemoLat[vesselId],DemoLng[vesselId]);
+    var latlng=new google.maps.LatLng(data[vesselId].lat,data[vesselId].lng);
     var myOptions={
         zoom:10,
         center:latlng,
@@ -148,7 +153,7 @@ function drawMap(){
     marker=new google.maps.Marker({
         position: latlng,
         map: map,
-        title: "Test Vessel 1"
+        title: data[vesselId].name
     });
     console.log("Map drawn");
 }
@@ -156,20 +161,52 @@ function drawMap(){
 function moveMarker() {
     console.log("Marker moved");
     var  vesselId=$("#track-vessel-selector").val();
-    var rId=0;
-    rid=parseInt(vesselId);
-    var vId=rid+1;
-    console.log(vId);
-    marker.setPosition(new google.maps.LatLng(DemoLat[rid],DemoLng[rid]));
-    map.panTo(new google.maps.LatLng(DemoLat[rid],DemoLng[rid]));
-    $("#map-vessel-name").text("Test Vessel "+vId);
+    
+    marker.setPosition(new google.maps.LatLng(data[vesselId].lat,data[vesselId].lng));
+    map.panTo(new google.maps.LatLng(data[vesselId].lat,data[vesselId].lng));
+    $("#map-vessel-name").text(data[vesselId].name);
+    $("#map-destination").text(data[vesselId].destination);
+    $("#map-speed").text(data[vesselId].speed);
 }
+
 
 function getData()
 {
-	
-    var token= "http://104.244.120.111/~emruzcom/getdata.php";
-    $.get(token, function (data) {
-        console.log(data);  
+    if (window.XMLHttpRequest) // for new browser
+    {
+        xhttp = new XMLHttpRequest();
+    }
+    else    // for old IE
+    {
+        xhttp = ActiveXObject(Microsoft.XMLHTTP); 
+    }
+    
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status==200)
+        {
+            var response = JSON.parse(this.responseText);
+             data = response;
+             setAll();
+        }    
+    }
+    xhttp.open("GET", "http://104.244.120.111/~emruzcom/RVTS-Admin/src/php/RVTS-Mobile_vesselInfo.php", true);
+    xhttp.send();
+    
+}
+function setAll(){
+    for(var i=0;i<data.length;i++)
+    {
+        $("#vessel-selector").append("<option value=\""+i+"\">"+data[i].id+": "+data[i].name+"</option>");
+        $("#track-vessel-selector").append("<option value=\""+i+"\">"+data[i].id+": "+data[i].name+"</option>");
+    }
+}
+
+function refreshPage()
+{
+    console.log("page refreshed");
+    jQuery.mobile.changePage(window.location.href, {
+        allowSamePageTransition: true,
+        transition: 'none',
+        reloadPage: true
     });
 }

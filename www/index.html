@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -34,7 +35,7 @@
       <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#vessel-status-page"><span class="sideBarIcon"><i class="ion-android-boat"></i></span><span class="sideBarText">Vessel Status</span></a>
       <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#weather-page"><span class="sideBarIcon"><i class="ion-ios-partlysunny"></i></span><span class="sideBarText">Weather</span></a>
       <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#schedule-page"><span class="sideBarIcon"><i class="ion-clipboard"></i></span><span class="sideBarText">Schedule</span></a>
-      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#track-page"><span class="sideBarIcon"><i class="ion-android-locate"></i></span><span class="sideBarText">Track Vessel</span></a>
+      <a class="sideMenuLink w3-card-2 w3-hover-shadow" href="#track-page" onclick="initMap();"><span class="sideBarIcon"><i class="ion-android-locate"></i></span><span class="sideBarText">Track Vessel</span></a>
     </section>
     <hr>
     <section>
@@ -78,8 +79,8 @@
           <h5 class="home-menu-text">Schedule</h5>
       </div>
     </a>
-    <a href="#track-page">
-      <div class="w3-card home-menus">
+    <a href="#track-page" onclick="initMap();">
+      <div class="w3-card home-menus" >
           <div class="home-icon-holder">
             <i class="ion-map home-menu-icon"><i class="ion-location font-black" style="font-size: 18pt;"></i></i>
           </div>
@@ -120,18 +121,14 @@
       <label for="select-choice-custom" class="select ui-select w3-center">Select Vessel</label>
       <div class="ui-select" align="center">
         <select name="vessel-selctor" id="vessel-selector" data-native-menu="false" data-mini="true">
-					<option value="1">Test Vessel 1</option>
-					<option value="2">Test Vessel 2</option>
-					<option value="3">Test Vessel 3</option>
-					<option value="4">Test Vessel 4</option>
-          <option value="5">Test Vessel 5</option>
+
 				</select>
         <input type="button" name="search-vessel" value="View Status" data-mini="true" data-theme="a" data-icon="search" data-iconpos="left" data-inline="true" onclick="setVesselStatus();">
       </div>
     </div>
 
     <!------------------------Display Result------------>
-    <div class="w3-card-2 w3-teal" align="center" id="vessel-status-result" style="display: none;">
+    <div class="w3-card-2 w3-teal" align="center" id="vessel-status-result" style="display: none; color:f1f1f1;">
       <h3 id="vs-name">Test Vessel 1</h3>
       <hr style="margin-top: 3px; margin-bottom: 3px;">
       <h4 id="vs-capacity">Capacity: 400 Tons</h4>
@@ -220,9 +217,7 @@
             <th class="st-col-4">To</th>
       </thead>
       <tbody class="st-body" id="st-body">
-        <script>
-          showSchedule();
-        </script>
+        
       </tbody>
     </table>
     </div>
@@ -236,29 +231,20 @@
     <h1>Track Vessel</h1>
   </div>
   <div data-role="main" class="ui-content" id="map-canvas">
-    <script>
-      $.getScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyBMbArU0qJJusHE-rKuI839Sy36K0q8900", function() {
-        drawMap();
-      });
-      </script>
+   
     </div>
     <a href="#selectTrackVessel" id="map-button" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn  ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-location ui-btn-icon-notext" title="Select Location" style="float: right;">Select Vessel</a>    
     <div class="ui-select" align="center" data-role="popup" id="selectTrackVessel">
       <select name="track-vessel-selector" id="track-vessel-selector" data-native-menu="true" data-mini="true" data-theme="a">
-        <option value="0">Vessel 1</option>
-        <option value="1">Vessel 2</option>
-        <option value="2">Vessel 3</option>
-        <option value="3">Vessel 4</option>
-        <option value="4">Vessel 5</option>
-        <option value="5">Vessel 6</option>
+       
       </select>
       <a  href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back" style="margin: 0 auto; background: teal; height: 30px;width: 80px;color:white; font-size: 8pt; margin-bottom: 5px;" onclick="moveMarker();">Done</a>
     </div>
     <div id="map-info">
       <h5 id="map-vessel-name">Test Vessel 1</h5>
       <hr id="lbreak">
-      <h5 id="map-destination" class="w3-center">Destination: Dhaka</h5>
-      <h5 id="map-speed" class="w3-center">Speed: 25km/h</h5>
+      <h5  class="w3-center">Destination: <span id="map-destination">Dhaka</span></h5>
+      <h5 class="w3-center">Speed: <span id="map-speed">25</span>km/h</h5>
     </div> 
 </div> 
 <!---------------------Help page -------------------->
@@ -297,6 +283,5 @@
     </p>
   </div>
 </div> 
-<script>getData();</script>
 </body>
 </html>
