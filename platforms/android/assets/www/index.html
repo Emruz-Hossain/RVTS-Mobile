@@ -48,7 +48,7 @@
 <div data-role="page" id="home-page">
   <div data-role="header" class="w3-card-2 topHeader" data-position="fixed" style="background: white; height: 45px;">
     <!--<a href="#sideBar" style="background: none;border:none;outline:none;"><i class="ion-android-menu"></i></a>-->
-    <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext">Next</a>
+    <a href="#sideBar" class="sideBarIndicator ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-grid ui-btn-icon-notext"></a>
     <h1>Home</h1>
   </div>
 
@@ -117,10 +117,10 @@
 
   <div data-role="main" class="ui-content">
     <!----------Vessel Selection -------------->
-    <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br w3-card-2 w3-white">
+    <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br w3-card-2 w3-white w3-padding">
       <label for="select-choice-custom" class="select ui-select w3-center">Select Vessel</label>
       <div class="ui-select" align="center">
-        <select name="vessel-selctor" id="vessel-selector" data-native-menu="false" data-mini="true">
+        <select name="vessel-selector" id="vessel-selector" data-native-menu="false" data-mini="true">
 
 				</select>
         <input type="button" name="search-vessel" value="View Status" data-mini="true" data-theme="a" data-icon="search" data-iconpos="left" data-inline="true" onclick="setVesselStatus();">
@@ -128,7 +128,7 @@
     </div>
 
     <!------------------------Display Result------------>
-    <div class="w3-card-2 w3-teal" align="center" id="vessel-status-result" style="display: none; color:f1f1f1;">
+    <div class="w3-card-2 w3-teal w3-padding" align="center" id="vessel-status-result" style="display: none; color:f1f1f1;">
       <h3 id="vs-name">Test Vessel 1</h3>
       <hr style="margin-top: 3px; margin-bottom: 3px;">
       <h4 id="vs-capacity">Capacity: 400 Tons</h4>
@@ -152,7 +152,7 @@
       <a href="#selectCity" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn  ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-location ui-btn-icon-notext" title="Select Location" style="float: right;">Select Location</a>
       <div class="ui-select" align="center" data-role="popup" id="selectCity">
         <select name="city-selector" id="city-selector" data-native-menu="true" data-mini="true" data-theme="a">
-          <option value="Dhaka">Dhaka, BD</option>
+          <option value="Dhaka" selected>Dhaka, BD</option>
           <option value="Chittagong">Chittagong, BD</option>
           <option value="Khulna">Khulna, BD</option>
           <option value="Barisal">Barisal, BD</option>
@@ -181,7 +181,7 @@
      <h4 id="city-name">Please Connect to internet</h4>
     </div>
 
-    <div class="w3-card-2 w3-white">
+    <div class="w3-card-2 w3-white w3-padding">
       <h3 class="fh-text">Forecast</h3>
       <div class="ft-holder">
         <table class="f-table w3-table w3-striped w3-border">
@@ -208,9 +208,9 @@
   </div>
 
   <div data-role="main" class="ui-content">
-    <div class="w3-card-2 w3-white st-holder">
-    <table class="w3-striped schedule-table">
-      <thead class="st-head w3-fixed">
+    <div class="w3-card-2 w3-white st-holder w3-padding" id="st-holder">
+    <table class="w3-striped schedule-table" id="stable">
+      <thead class="st-head">
             <th class="st-col-1">SL.</th>
             <th class="st-col-2">Name</th>
             <th class="st-col-3">From</th>
@@ -240,11 +240,12 @@
       </select>
       <a  href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back" style="margin: 0 auto; background: teal; height: 30px;width: 80px;color:white; font-size: 8pt; margin-bottom: 5px;" onclick="moveMarker();">Done</a>
     </div>
-    <div id="map-info">
-      <h5 id="map-vessel-name">Test Vessel 1</h5>
+    <div id="map-info" class="w3-card w3-white w3-padding" style="opacity: 0.9">
+      <h4 id="map-vessel-name">Please Select Vessel</h4>
       <hr id="lbreak">
-      <h5  class="w3-center">Destination: <span id="map-destination">Dhaka</span></h5>
-      <h5 class="w3-center">Speed: <span id="map-speed">25</span>km/h</h5>
+      <h5  class="w3-center">Destination: <span id="map-destination">NA</span></h5>
+      <h5 class="w3-center">Speed: <span id="map-speed">0</span>km/h</h5>
+      <h5 class="w3-center">ETA: <span id="map-eta-hour">0</span> hours <span id="map-eta-min">0</span> minutes</h5>
     </div> 
 </div> 
 <!---------------------Help page -------------------->
@@ -255,7 +256,16 @@
   </div>
 
   <div data-role="main" class="ui-content">
-    <p>Welcome to Help section. Unfortunately currently there are no available help. Sorry :(</p>
+    <div class="w3-card w3-white w3-padding w3-center w3-margin">
+      <h4>No Vessel list in Vessel Status  selector!!</h4>
+      <hr>
+      <h5>Make sure that your data connection in ON and restart the app.</h5>
+    </div>
+    <div class="w3-card w3-white w3-padding w3-center w3-margin">
+      <h4>Track Vessel does not show my current vessels information by default!!</h4>
+      <hr>
+      <h5>Please enable GPS on your mobile and restart the app. This app select your vessel based on GPS location of your device and GPS location of vessel. It may select wrong vessel as your current vessel if your device's GPS location is wrong.</h5>
+    </div>
   </div>
 </div> 
 
@@ -267,20 +277,31 @@
   </div>
 
   <div data-role="main" class="ui-content" style="text-align:center;">
-    <h3>Riverine Vehicle Tracking System (RVTS)</h3>
-    <hr>
-    <p>This app was developed by<br>
-      Md. Emruz Hossain<br>
-      Student of<br>
-      Department of CSE<br>
-      Chittagong University of Engineering & Technology<br>
-      <br>
-      Supervised by,<br>
-      Dr. Mohammad Shamsul Arefin<br>
-      Head of Department and Professor<br>
-      Department of CSE<br>
-      Chittagong University of Engineering & Technology
-    </p>
+    <div class="w3-card w3-white w3-margin w3-center w3-padding">
+      <h3>Riverine Vehicle Tracking System (RVTS)</h3>
+      <h5>Version: 1.0.0</h5>
+      
+    </div>
+    <div class="w3-card w3-white w3-margin w3-center w3-padding">
+      
+      <h4>Developed By</h4>
+      <hr>
+        <h5>Md. Emruz Hossain
+        <h5>Student,</h5>
+        <h5>Department of CSE,</h5>
+        <h5>Chittagong University of Engineering & Technology</h5>
+      </h5>
+
+    </div>
+
+      <div class="w3-card w3-white w3-margin w3-center w3-padding">
+        <h4>Supervised By</h4>
+        <hr>
+        <h5>Dr. Mohammad Shamsul Arefin</h5>
+        <h5>Head of Department and Professor,</h5>
+        <h5>Department of CSE,</h5>
+        <h5>Chittagong University of Engineering & Technology</h5>
+      </div>
   </div>
 </div> 
 </body>

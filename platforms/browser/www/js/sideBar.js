@@ -10,9 +10,24 @@ $(function(){
         $(".sideBarIndicator").css("left","5px");
     });
     getData();
+    var screen = $.mobile.getScreenHeight();
+    
+    var header = $(".ui-header").hasClass("ui-header-fixed") ? $(".ui-header").outerHeight()  - 1 : $(".ui-header").outerHeight();
+    
+    var footer = $(".ui-footer").hasClass("ui-footer-fixed") ? $(".ui-footer").outerHeight() - 1 : $(".ui-footer").outerHeight();
+    
+    /* content div has padding of 1em = 16px (32px top+bottom). This step
+       can be skipped by subtracting 32px from content var directly. */
+    var contentCurrent = $(".ui-content").outerHeight() - $(".ui-content").height();
+    
+    var content = screen - header - footer - contentCurrent;
+    
+    $(".ui-content").height(content);
+
     setTimeout(function(){
-        showSchedule();
-    },100);
+        showSchedule(content);
+        refreshVesselStatus();
+    },3000);
     
 });
 
@@ -40,6 +55,15 @@ function setVesselStatus() {
          $("#vessel-status-result").removeClass("w3-red");
         $("#vessel-status-result").addClass("w3-teal");
     }
+}
+
+function refreshVesselStatus(){
+    console.log("refreshed..");
+    getData();
+    setVesselStatus();
+   setTimeout(function(){
+       refreshVesselStatus();
+   },5000);  
 }
 
 //----------------------------Weather----------------------------
@@ -121,11 +145,12 @@ function ModifyFirstLetter(str)
     return finalString;
 }
 
-function showSchedule(){
+function showSchedule(device_height){
     $("#st-body").html("");
-    for(var i=0;i<10;i++)
+    $("#st-holder").css("height",device_height);
+    for(var i=0;i<data.length;i++)
     {
-        $("#st-body").append("<tr><td class=\"st-col-1\">"+i+"</td><td class=\"st-col-2\">Test Vessel "+i+"</td><td class=\"st-col-3\">Dhaka<br>15:00</td> <td class=\"st-col-4\">Khulna<br>06:00</td></tr>");
+        $("#st-body").append("<tr><td class=\"st-col-1\">"+(i+1)+"</td><td class=\"st-col-2\">"+data[i].name+"</td><td class=\"st-col-3\">Dhaka<br>15:00</td> <td class=\"st-col-4\">Khulna<br>06:00</td></tr>");
     }
 }
 // ----------------------Track Vessel Page--------------------------
@@ -167,6 +192,8 @@ function moveMarker() {
     $("#map-vessel-name").text(data[vesselId].name);
     $("#map-destination").text(data[vesselId].destination);
     $("#map-speed").text(data[vesselId].speed);
+    $("#map-eta-hour").text("3");
+    $("#map-eta-min").text(data[vesselId].id);
 }
 
 
@@ -194,11 +221,20 @@ function getData()
     
 }
 function setAll(){
+    var vsID=$("select[name='vessel-selector'] option:selected").index();
+    // console.log("vsID = "+vsID);
+    $("#vessel-selector").empty();
+    var tvsID = $("select[name='track-vessel-selector'] option:selected").index();
+    // console.log("tvsID = "+tvsID);
+    $("#track-vessel-selector").empty();
     for(var i=0;i<data.length;i++)
     {
         $("#vessel-selector").append("<option value=\""+i+"\">"+data[i].id+": "+data[i].name+"</option>");
         $("#track-vessel-selector").append("<option value=\""+i+"\">"+data[i].id+": "+data[i].name+"</option>");
     }
+    $('#vessel-selector > option').eq(vsID).attr('selected','selected');
+    $('#track-vessel-selector > option').eq(tvsID).attr('selected','selected');
+
 }
 
 function refreshPage()

@@ -248,6 +248,8 @@ h1 {
 
 .schedule-table{
     width: 100%;
+    height: 100%;
+    overflow: auto;
     text-align: center;
 }
 .schedule-table td{
@@ -285,7 +287,6 @@ h1 {
     text-align: center;
 }
 .st-holder{
-    max-height: 400px;
     overflow:auto;
 }
 
@@ -309,6 +310,8 @@ h1 {
     position: relative;
     z-index: 2;
     margin-top: 100%;
+    width: 50%;
+    padding: 5px;
 }
 #map-vessel-name{
     text-align: center;
